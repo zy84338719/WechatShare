@@ -2,14 +2,11 @@
  <div class="details">
  <div class="description">
   <span class="label" :style="{backgroundColor: details.videoLabelColor}">{{details.videoLabel}}</span>
-  <p class="title">{{details.videoTitle}}</p>
+  <p class="title">哈哈哈</p>
   <p class="info">
-  <span>{{details.mtime}}</span>
   <i class="iconfont icon--"></i>
-  {{details.videoPlayTimes}}
   </p>
   <p class="summary">你好靓仔</p>
-  <p class="article ql-editor" v-html="details.videoDescription"></p>
  </div>
  </div>
 </template>
@@ -54,7 +51,7 @@ export default {
       timestamp: this.timestamp, // 必填，生成签名的时间戳
       nonceStr: this.nonceStr, // 必填，生成签名的随机串
       signature: this.signature, // 必填，签名，见附录1
-      jsApiList: ['updateTimelineShareData', 'updateAppMessageShareData'],
+      jsApiList: ['updateTimelineShareData', 'updateAppMessageShareData']
     })
     wx.ready(function () {  
       wx.updateTimelineShareData({
