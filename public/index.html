@@ -19,51 +19,37 @@
             signature: res.data.signature, // 必填，签名
             jsApiList: ['updateAppMessageShareData','updateTimelineShareData'] // 必填，需要使用的JS接口列表
           });
-          wx.ready(function () {
+      wx.ready(function () {
+        //分享给朋友
+        wx.updateAppMessageShareData({
 
-//分享给朋友
+            title: '【疯抢中..】OK！不超值，拿锤砸！手快有！手慢无！',
 
-wx.updateAppMessageShareData({
+            desc: '我刚抢了，你也快来抢吧~~还有红包呢！超级红包，红包',
 
-    title: '【疯抢中..】OK！不超值，拿锤砸！手快有！手慢无！',
+            link: "http://test.murphyyi.com/index.html",
 
-    desc: '我刚抢了，你也快来抢吧~~还有红包呢！超级红包，红包',
+            imgUrl: 'https://sjimg.95qy.cn/21?imageView2/1/w/200/h/200/q/85',
 
-    link: "http://test.murphyyi.com/index.html",
+            success:function(){
 
-    imgUrl: 'https://sjimg.95qy.cn/21?imageView2/1/w/200/h/200/q/85',
+            }
+        });
 
-    success:function(){
+    //分享到朋友圈
 
-    }
+        wx.updateTimelineShareData({
 
-});
+            title: '【疯抢中..】不OK！不超值，拿锤砸！手快有！手慢无！',
 
-//分享到朋友圈
+            link: "http://test.murphyyi.com/index.html",
 
-wx.updateTimelineShareData({
+            imgUrl: 'https://sjimg.95qy.cn/21?imageView2/1/w/200/h/200/q/85',
 
-    title: '【疯抢中..】不OK！不超值，拿锤砸！手快有！手慢无！',
+            success:function(){
 
-    link: "http://test.murphyyi.com/index.html",
-
-    imgUrl: 'https://sjimg.95qy.cn/21?imageView2/1/w/200/h/200/q/85',
-
-    success:function(){
-
-    }
-
-});
-
-
-
-});
-
-wx.error(function (res) {
-
-console.log("页面加载异常！" + res.errMsg);
-
-});
+            }});
+          })
         })
     </script> -->
     <title>测试</title>
