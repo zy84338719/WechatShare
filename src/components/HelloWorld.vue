@@ -1,58 +1,120 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
-  </div>
+ <div class="details">
+ <div class="description">
+  <span class="label" :style="{backgroundColor: details.videoLabelColor}">{{details.videoLabel}}</span>
+  <p class="title">{{details.videoTitle}}</p>
+  <p class="info">
+  <span>{{details.mtime}}</span>
+  <i class="iconfont icon--"></i>
+  {{details.videoPlayTimes}}
+  </p>
+  <p class="summary">你好靓仔</p>
+  <p class="article ql-editor" v-html="details.videoDescription"></p>
+ </div>
+ </div>
 </template>
-
 <script>
+/* eslint-disable no-undef */
+import axios from 'axios'
+import wx from 'weixin-js-sdk'
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
+ components: {
+ },
+ data () {
+ return {
+  details: {},
+  appId: '',
+  signature: '',
+  timestamp: '',
+  nonceStr: '',
+  url:''
+ }
+ },
+ beforeDestroy () {
+ document.querySelector('.htmlTitle').text = 'title'
+ },
+ mounted () {
+ // 获取详情数据<span class="space" style="white-space:pre;display:inline-block;text-indent:2em;line-height:inherit;">let url = window.location.href.split("#")[0]</span>
+ axios.get('http://test.murphyyi.com:8080/demo/wechatDemo?appId=wx17db0504203502fd&appSerset=6714e55d259ae02cc8435e580faa849c&url=http%3A%2F%2Ftest.murphyyi.com%2Findex.html')
+ .then((res)=>{
+  this.appId = res.data.appId
+  this.signature = res.data.signature
+  this.timestamp = res.data.timestamp
+  this.nonceStr = res.data.nonceStr
+  this.url = res.data.url
+  this.shard()
+  })
+ }
+ ,
+ methods: {
+  shard () {
+    wx.config({
+      debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+      appId: this.appId, // 必填，公众号的唯一标识
+      timestamp: this.timestamp, // 必填，生成签名的时间戳
+      nonceStr: this.nonceStr, // 必填，生成签名的随机串
+      signature: this.signature, // 必填，签名，见附录1
+      jsApiList: ['updateTimelineShareData', 'updateAppMessageShareData'],
+    })
+    wx.ready(function () {  
+      wx.updateTimelineShareData({
+          title: "你丑爆了",
+          link: this.url,
+          imgUrl: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572024945&di=698f183143b4dd6123faa9b7d0767f46&imgtype=jpg&er=1&src=http%3A%2F%2Fimg1.shikee.com%2Freport%2F2018%2F08%2F17%2F0810450906.jpg", // 分享图标
+          success: function () {
+            alert('分享朋友圈成功')
+          },
+      })
+      wx.updateAppMessageShareData({
+          title: "你好丑",
+          desc: "不！！！你不丑。。。",
+          link: this.url,
+          imgUrl: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572024945&di=698f183143b4dd6123faa9b7d0767f46&imgtype=jpg&er=1&src=http%3A%2F%2Fimg1.shikee.com%2Freport%2F2018%2F08%2F17%2F0810450906.jpg", // 分享图标
+          success: function () {
+          alert('分享给朋友成功')
+          },
+        })
+      })
   }
 }
+}
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
+<style lang="less" scoped>
+.details {
+ overflow: hidden;
+ .description {
+ padding: 10px;
+ .label {
   display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+  padding:0 10px;
+  height: 22px;
+  line-height: 22px;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+ }
+ .title {
+  line-height: 30px;
+  font-size: 18px;
+ }
+ .info {
+  line-height: 26px;
+  color: #949494;
+  span {
+  margin-right: 15px;
+  }
+  .iconfont {
+  font-size: 12px;
+  }
+ }
+ .summary {
+  margin-top: 20px;
+  color: #4b4b4b;
+  font-size: 16px;
+ }
+ .article {
+  margin-top: 10px;
+ }
+ }
 }
 </style>

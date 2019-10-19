@@ -5,7 +5,68 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>hello-world</title>
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+    <script>
+       this.axios.get('http://test.murphyyi.com:8080/demo/wechatDemo?appId=wx17db0504203502fd&appSerset=6714e55d259ae02cc8435e580faa849c&url=http%3A%2F%2Ftest.murphyyi.com%2Findex.html')
+        .then((res)=>{
+          console.log(res)
+          wx.config({
+            debug: true, //开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: res.data.appId, //必填，公众号的唯一标识
+            timestamp: res.data.timestamp, // 必填，生成签名的时间戳
+            nonceStr: res.data.nonceStr, // 必填，生成签名的随机串
+            signature: res.data.signature, // 必填，签名
+            jsApiList: ['updateAppMessageShareData','updateTimelineShareData'] // 必填，需要使用的JS接口列表
+          });
+          wx.ready(function () {
+
+//分享给朋友
+
+wx.updateAppMessageShareData({
+
+    title: '【疯抢中..】OK！不超值，拿锤砸！手快有！手慢无！',
+
+    desc: '我刚抢了，你也快来抢吧~~还有红包呢！超级红包，红包',
+
+    link: "http://test.murphyyi.com/index.html",
+
+    imgUrl: 'https://sjimg.95qy.cn/21?imageView2/1/w/200/h/200/q/85',
+
+    success:function(){
+
+    }
+
+});
+
+//分享到朋友圈
+
+wx.updateTimelineShareData({
+
+    title: '【疯抢中..】不OK！不超值，拿锤砸！手快有！手慢无！',
+
+    link: "http://test.murphyyi.com/index.html",
+
+    imgUrl: 'https://sjimg.95qy.cn/21?imageView2/1/w/200/h/200/q/85',
+
+    success:function(){
+
+    }
+
+});
+
+
+
+});
+
+wx.error(function (res) {
+
+console.log("页面加载异常！" + res.errMsg);
+
+});
+        })
+    </script> -->
+    <title>测试</title>
   </head>
   <body>
     <noscript>
